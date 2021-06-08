@@ -22,11 +22,12 @@ router.post("/",middleware.isLoggedIn,function(req,res) {
     var name = req.body.name;
     var img = req.body.img;
     var desc = req.body.desc;
+    var map = req.body.map;
     var author = {
         id:req.user._id,
         username:req.user.username
     }
-    var camp = {name:name,image:img,description:desc,author:author};
+    var camp = {name:name,image:img,description:desc,author:author,map:map};
     // campgrounds.push(camp);
     Campground.create(
         camp,
@@ -81,7 +82,8 @@ router.post("/:id",middleware.check,function(req,res) {
     var name = req.body.name;
     var img = req.body.img;
     var desc = req.body.desc;
-    var camp = {name:name,image:img,description:desc};
+    var map = req.body.map;
+    var camp = {name:name,image:img,description:desc,map:map};
     Campground.findByIdAndUpdate(req.params.id,camp,function(err,campground) {
         if(err){
             res.redirect("/campgrounds")
